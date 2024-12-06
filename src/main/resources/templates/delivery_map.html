@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Delivery Map</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=03c9134c-d8c1-49cd-b884-cfaf6ba941a9" type="text/javascript"></script>
+    <script type="text/javascript" th:inline="javascript">
+        ymaps.ready(init);
+
+        function init() {
+            const delivery = /*[[${delivery}]]*/ null;
+            console.log("Delivery data:", delivery); // Добавьте логирование для проверки данных
+            if (delivery && delivery.latitude && delivery.longitude) {
+                const location = [parseFloat(delivery.latitude), parseFloat(delivery.longitude)];
+                const map = new ymaps.Map("map", {
+                    center: location,
+                    zoom: 12
+                });
+                const placemark = new ymaps.Placemark(location, {
+                    balloonContent: delivery.status
+                });
+                map.geoObjects.add(placemark);
+            } else {
+                console.error("Delivery data is null or undefined");
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4">Delivery Map</h1>
+        <div id="map" style="height: 500px; width: 100%;"></div>
+    </div>
+</body>
+</html>

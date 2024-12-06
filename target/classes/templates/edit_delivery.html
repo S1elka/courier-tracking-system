@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Delivery</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4">Edit Delivery</h1>
+        <form th:action="@{/admin/deliveries/edit/{id}(id=${delivery.id})}" th:object="${delivery}" method="post">
+            <div class="form-group">
+                <label for="status">Status</label>
+                <input type="text" class="form-control" id="status" th:field="*{status}" required>
+            </div>
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" class="form-control" id="location" th:field="*{location}" required>
+            </div>
+            <div class="form-group">
+                <label for="latitude">Latitude</label>
+                <input type="text" class="form-control" id="latitude" th:field="*{latitude}" required>
+            </div>
+            <div class="form-group">
+                <label for="longitude">Longitude</label>
+                <input type="text" class="form-control" id="longitude" th:field="*{longitude}" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Delivery</button>
+        </form>
+    </div>
+</body>
+</html>
